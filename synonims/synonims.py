@@ -18,7 +18,7 @@ resp = urllib2.urlopen(url).read()
 
 syns = json.loads(resp).get(u'def')
 print resp
-print syns
+# print syns
 
 d = {
     "head": {},
