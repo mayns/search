@@ -9,7 +9,7 @@ import re
 def do_index(l):
     """создает индекс. на вход - лист строк, каждая строка - отдельное четверостишье"""
     delete = re.compile(u'\W+?|\d+?', re.UNICODE)
-    poem_index =  {}
+    poem_index = {}
     for i in xrange(len(l)):
         print 'creating index for poem ...', i
         pos = 0
@@ -47,7 +47,7 @@ else:
 p_index = do_index(poems)
 
 for key in sorted(p_index.keys()):
-    print u'{0:10} ==> {1:10}'.format(key, p_index[key])
+    print u'{0:14} ==> {1}'.format(key, p_index[key])
 
 
 
