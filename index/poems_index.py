@@ -6,7 +6,7 @@ import codecs
 from normal_form import get_normal
 import re
 
-delete = re.compile(r'\W+?|\d+?', re.UNICODE)
+delete = re.compile(u'[^а-яА-Я\-]+?', re.UNICODE)
 clr = re.compile(r'\s+', re.UNICODE)
 
 
