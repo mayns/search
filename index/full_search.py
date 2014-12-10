@@ -5,7 +5,7 @@ __author__ = 'nyash myash'
 import codecs
 import re
 
-delete = re.compile(u'[^а-яА-Я\-]+?', re.UNICODE)
+delete = re.compile(r'[a-zA-Z0-9_\-]+?|\d+?', re.UNICODE)
 clr = re.compile(r'\s+', re.UNICODE)
 
 def clear(s):
