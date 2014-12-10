@@ -20,7 +20,7 @@ def do_index(l):
         for word in sen:
             normal = get_normal(word)
             for item in normal:
-  index              p_speech = item[1]
+                p_speech = item[1]
                 if p_speech not in (u'PREP', u'CONJ', u'PRCL', u'INTJ'):
                     poem_index.setdefault(item[0],[]).append((i,pos,p_speech))
             pos +=1
