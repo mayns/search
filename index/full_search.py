@@ -9,7 +9,7 @@ delete = re.compile(r'\W+?|\d+?', re.UNICODE)
 clr = re.compile(r'\s+', re.UNICODE)
 
 def clear(s):
-    """очищает строку и приводит к нижнему регистру"""
+    """очищает строку от пунктуации, цифр и приводит к нижнему регистру"""
     s = delete.sub(' ', s)
     s = clr.sub(u' ', s).strip()
     return s.lower()

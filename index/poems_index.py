@@ -10,7 +10,6 @@ delete = re.compile(r'\W+?|\d+?', re.UNICODE)
 clr = re.compile(r'\s+', re.UNICODE)
 
 
-
 def do_index(l):
     """создает индекс. на вход - лист строк, каждая строка - отдельное четверостишье.
     возвращает словарь {normal_form : [(poem number, position in poem, part of speech)]}"""
