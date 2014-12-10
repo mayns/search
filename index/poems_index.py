@@ -55,22 +55,5 @@ for key in sorted(p_index.keys()):
     print u'{0:14} ==> {1}'.format(key, p_index[key])
 
 
-request = raw_input().decode(encoding='utf-8')
-request = clear(request)
-
-
-# полнотекстовый поиск
-# мне кажется, от него стоит вообще отказаться, иначе на большом объеме стихов мы зависнем, так и не дойдя до поиска
-# по индексу. вместо него лучше использовать вхождение нормальных форм этих слов с минимальным расстоянием
-for item in poems:
-    temp = clear(item)
-    if u' ' not in request:
-        if request in temp.split():
-            print item
-    else:
-        if request in temp:
-            print item
-
-
 
 
