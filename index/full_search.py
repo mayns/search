@@ -32,6 +32,9 @@ else:
 
 request = raw_input().decode(encoding='utf-8')
 request = clear(request)
+if u'ё' in request:
+    request = request.replace(u'ё', u'е')
+
 
 
 # полнотекстовый поиск
@@ -39,6 +42,8 @@ request = clear(request)
 # по индексу. вместо него лучше использовать вхождение нормальных форм этих слов с минимальным расстоянием
 for item in poems:
     temp = clear(item)
+    if u'ё' in temp:
+        temp = temp.replace(u'ё', u'е')
     if u' ' not in request:
         if request in temp.split():
             print item

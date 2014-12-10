@@ -9,6 +9,8 @@ import re
 delete = re.compile(r'\W+?|\d+?', re.UNICODE)
 clr = re.compile(r'\s+', re.UNICODE)
 
+
+
 def do_index(l):
     """создает индекс. на вход - лист строк, каждая строка - отдельное четверостишье.
     возвращает словарь {normal_form : [(poem number, position in poem, part of speech)]}"""
@@ -18,6 +20,8 @@ def do_index(l):
         pos = 0
         sen = clear(l[i]).split()
         for word in sen:
+            if u'ё' in word:
+                word = word.replace(u'ё', u'е')
             normal = get_normal(word)
             for item in normal:
                 p_speech = item[1]
