@@ -8,9 +8,7 @@ import json
 
 
 def getwordfromindex(word):
-
-    print poems_index[word]
-    return poems_index[word]
+  return poems_index[word]
 
 def check_phrase(phrase):
   res_tuples = []
@@ -18,7 +16,7 @@ def check_phrase(phrase):
     try:
       res_tuples.extend(getwordfromindex(word))
     except Exception:
-      print 'PLOHOMNE'
+      print word +' PLOHO'
   res_dict = {}
   #iterate through all tuples from index and build a dict
   #dict = {id of word in index : list of all tuples from index info}
@@ -31,6 +29,9 @@ def check_phrase(phrase):
       res_dict[elem[0]] = curr_val 
     else:
       res_dict.update({elem[0]:[elem]})
+  
+  if res_dict == {}:
+    raise Exception
  
   #best result of inclusions 
   maxlen = max([len(res_dict[elem]) for elem in res_dict])
@@ -81,14 +82,13 @@ def process_request(request):
   return sorted(unsorted_res,reverse=True)
 
 poems = index.do_list(u'poems.txt')
-# poems_index = index.do_index(poems)
+#poems_index = index.do_index(poems)
 
 with codecs.open('index.txt', 'r', encoding='utf-8') as f:
     r = f.read()
     poems_index = json.loads(r)
-
 while(True):
   print 'Hi there! I am ready to process your request...'
-  res = process_request(raw_input())
+  res = process_request(raw_input().decode(encoding='utf-8'))
   print res
 #TODO we may OGREBSTY from the fact, that we may get several inclusions of a word inside one poem
