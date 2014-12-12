@@ -28,21 +28,14 @@ def do_list(path):
     return poems
 
 
-#for item in poems:
-#    print item
-
-
-#for item in poems:
-#    if request in item:
-#        print poems.index(item)+1
 poems = do_list(u'oster.txt')
-#for item in poems:
-#    print item
 print len(poems)
 #poems_index = index.do_index(poems)
 with codecs.open('index.txt', 'r', encoding='utf-8') as f:
     r = f.read()
     poems_index = json.loads(r)
+#for key in sorted(poems_index.keys()):
+#  print key , poems_index[key]
 while(True):
   print 'Hi there! I am ready to process your request...'
   #print raw_input().decode(encoding='utf-8')

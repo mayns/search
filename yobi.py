@@ -57,9 +57,7 @@ def check_phrase(phrase):
 def process_request(request):
   #TODO change for oks method
   search_phrases = amazing_fun(request)
-
-  #search_phrases = [request]  
- 
+  print search_phrases
   max_inclusion_len = 0
   pretendents = []
 
@@ -92,22 +90,44 @@ def process_request(request):
   unsorted_res = list(pretendents[max_id])
   return sorted(unsorted_res,reverse=True)
 
-'''
-poems = index.do_list(u'poems.txt')
-#poems_index = index.do_index(poems)
+def do_list(path):
+    f = codecs.open(path, encoding=u'utf-8')
+    poems = []
+    s = u''
+    for line in f.readlines():
+        if (line != u'\n') and  (u'*' not in line):
+            s+= line
+        else:
+            if s:
+                poems.append(s)
+                s = ''
+    else:
+        if s:
+            poems.append(s)
+    return poems
 
+
+poems = do_list(u'oster.txt')
+#poems_index = index.do_index(poems)
 with codecs.open('index.txt', 'r', encoding='utf-8') as f:
     r = f.read()
     poems_index = json.loads(r)
+#for key in sorted(poems_index.keys()):
+#  print key , poems_index[key]
+for i in range(50):
+  print
 while(True):
   print 'Hi there! I am ready to process your request...'
   #print raw_input().decode(encoding='utf-8')
   res = process_request(raw_input().decode(encoding='utf-8'))
   if not res:
-    print 'no res for req'
+    print 'No result for your request'
     continue
+
+
   for elem in res:
-    print poems[elem] 
- 
-#TODO we may OGREBSTY from the fact, that we may get several inclusions of a word inside one poem
-'''
+    print '* * * ' +str(elem) + ' * * *'
+    print poems[elem]
+    print
+
+#TODO пропала мама соврать
