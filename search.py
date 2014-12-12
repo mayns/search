@@ -9,7 +9,7 @@ def do_list(path):
     poems = []
     s = u''
     for line in f.readlines():
-        if line != u'\n' and u'*' not in line:
+        if line != u'\n' and  u'* * *' not in line:
             s+= line
         else:
             if s:
@@ -21,9 +21,9 @@ def do_list(path):
     return poems
 
 poems = do_list(u'oster.txt')
-
-# for item in poems:
-#     print item
+#
+for item in poems:
+    print item
 
 
 request = raw_input().decode(encoding='utf-8')
