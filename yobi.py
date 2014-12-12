@@ -92,6 +92,7 @@ def process_request(request):
   unsorted_res = list(pretendents[max_id])
   return sorted(unsorted_res,reverse=True)
 
+'''
 poems = index.do_list(u'poems.txt')
 #poems_index = index.do_index(poems)
 
@@ -109,3 +110,4 @@ while(True):
     print poems[elem] 
  
 #TODO we may OGREBSTY from the fact, that we may get several inclusions of a word inside one poem
+'''
