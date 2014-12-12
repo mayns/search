@@ -3,6 +3,8 @@
 import operator
 import random
 import index.poems_index as index
+import codecs
+import json
 
 
 def getwordfromindex(word):
@@ -74,8 +76,11 @@ def process_request(request):
   return sorted(unsorted_res,reverse=True)
 
 poems = index.do_list(u'poems.txt')
-poems_index = index.do_index(poems)
+# poems_index = index.do_index(poems)
 
+with codecs.open('index.txt', 'r', encoding='utf-8') as f:
+    r = f.read()
+    poems_index = json.loads(r)
 
 while(True):
   print 'Hi there! I am ready to process your request...'
