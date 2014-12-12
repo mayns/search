@@ -44,9 +44,7 @@ def do_index(l):
                 continue
             normal = get_normal(word)
             for item in normal:
-                p_speech = item[1]
-                if p_speech not in (u'предлог', u'союз', u'междометие', u'частицв'):
-                    poem_index.setdefault(item[0], []).append((i, pos, p_speech))
+                poem_index.setdefault(item[0], []).append((i, pos))
             pos +=1
     cur_index = json.dumps(poem_index)
     with codecs.open('index.txt', 'w', encoding='utf-8') as f:
@@ -59,6 +57,16 @@ def clear(s):
     s = clr.sub(u' ', s).strip()
     return s.lower()
 
+# def clear_prep(s):
+#     s = delete.sub(' ', s)
+#     s = clr.sub(u' ', s).strip()
+#     normal = get_normal(s)
+#     for item in normal:
+#         p_speech = item[1]
+#         if p_speech not in (u'предлог', u'союз', u'междометие', u'частицв'):
+#             poem_index.setdefault(item[0], []).append((i, pos))
+#     return s.lower()
+
 
 # poems = do_list(u'poems.txt')
 #
@@ -67,6 +75,9 @@ def clear(s):
 #
 # p_index = do_index(poems)
 #
+# for key in sorted(p_index.keys()):
+#     print u'{0:14} ==> {1}'.format(key, p_index[key])
+
 # cur_index = json.dumps(p_index)
 # with codecs.open('index.txt', 'w', encoding='utf-8') as f:
 #     f.write(cur_index)
@@ -78,7 +89,7 @@ def clear(s):
 #
 #
 # for key in sorted(restored_index.keys()):
-#     print u'{0:14} ==> {1}'.format(key, restored_index[key])
+    # print u'{0:14} ==> {1}'.format(key, restored_index[key])
 
 
 

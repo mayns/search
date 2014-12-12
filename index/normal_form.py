@@ -35,7 +35,7 @@ def get_normal(word):
         p = item.normal_form
         if p not in normal:
             normal.append(p)
-            if item.tag.POS:
+            if item.tag.POS and item.tag.POS not in (u'PRCL',u'CONJ', u'PREP', u'INTJ'):
                 p_speech.append(pos_match[item.tag.POS])
     return zip(normal, p_speech)
 

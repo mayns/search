@@ -7,7 +7,7 @@ import codecs
 import json
 
 
-def getwordfromindex(word):
+def getwordfromindex(poems_index, word):
   return poems_index[word]
 
 def check_phrase(phrase):
