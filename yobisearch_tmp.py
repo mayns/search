@@ -15,29 +15,31 @@ def check_phrase(phrase):
   #dict = {id of word in index : list of all tuples from index info}
   #tuple has the following struct: (id of a poem, pos of word in a poem, )
   for elem in res_tuples:
-    if elem[0] in res_dict.keys():  
-      res_dict.update({elem[0]:dict.get(elem[0]).append(elem)})
+    if elem[0] in res_dict.keys():
+      curr_val = res_dict[elem[0]]
+      #WTF!!!! Can't append to dic[elem[0]]????
+      curr_val.append(elem)
+      res_dict[elem[0]] = curr_val 
     else:
       res_dict.update({elem[0]:[elem]})
  
   #best result of inclusions 
-  maxlen = max([len(res_dict[elem] for elem in res_dict])
-
-  res = [{el_id:res_dict[el_id]} for el_id in res_dict if len(res_dict[el_id]) == maxlen]
-
-#TODO CHCK ALL BELOW
+  maxlen = max([len(res_dict[elem]) for elem in res_dict])
+  res = {el_id:res_dict[el_id] for el_id in res_dict if len(res_dict[el_id]) == maxlen}
   score_table = {}
   for elem_id in res:
     values = res[elem_id]
-    if maxlen == 1:
-      score_table.update({elem_id,1})#1 for position scoring
-    else:
-      sor = sorted(values,key=lambda x: x[1])
-      diff = (sor[len(sor)-1] - sor[0])/maxlen
-      score_table.update({elem_id,diff})
 
+    if maxlen == 1:
+      score_table.update({elem_id:1})#1 for position scoring
+    else:
+      #TODO may cause problems if we have two identical tuples in res
+      sor = sorted(values,key=lambda x: x[1])
+      diff = (sor[len(sor)-1][1] - sor[0][1])/maxlen
+      score_table.update({elem_id:diff})
   return(maxlen,score_table)
 
+#TODO CHCK ALL BELOW
 def process_request(request):
   #TODO change for oks method
   #search_phrases = oks.amazingfun(request)
