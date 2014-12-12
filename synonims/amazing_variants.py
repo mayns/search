@@ -33,4 +33,4 @@ def amazing_fun(boring_string, lang=u'ru-ru'):
     return amazing_variants
 
 if __name__ == u'__main__':
-    amazing_fun(u'выпить водочки да закусить огурчиком')
+    amazing_fun(u'ночь на ладони')
