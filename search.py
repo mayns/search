@@ -16,7 +16,7 @@ def do_list(path):
     poems = []
     s = u''
     for line in f.readlines():
-        if line != u'\n' and  u'* * *' not in line:
+        if (line != u'\n') and  (u'*' not in line):
             s+= line
         else:
             if s:
@@ -35,9 +35,11 @@ def do_list(path):
 #for item in poems:
 #    if request in item:
 #        print poems.index(item)+1
-poems = index.do_list(u'oster.txt')
+poems = do_list(u'oster.txt')
+#for item in poems:
+#    print item
 print len(poems)
-poems_index = index.do_index(poems)
+#poems_index = index.do_index(poems)
 with codecs.open('index.txt', 'r', encoding='utf-8') as f:
     r = f.read()
     poems_index = json.loads(r)
