@@ -24,17 +24,18 @@ def get_syns(words, lang=u'ru-ru'):
         resp = urllib2.urlopen(YA_REQUEST(word[0], lang)).read()
         syns = json.loads(resp).get(u'def')
         if not syns:
-            return []
+            continue
         syns = syns[0].get(u'tr')
         if not syns:
-            return []
+            continue
+
         for syn in syns:
             if syn.get(u'pos') != word[1] or not syn.get(u'text'):
-                word_syns.add(None)
+                continue
             word_syns.add(syn.get(u'text'))
             if syn.get(u'syn'):
                 map(lambda x: word_syns.add(x['text']), syn['syn'])
-        syns_variants.append(list(word_syns))
+        syns_variants.extend(list(word_syns))
     return syns_variants
 
 d = {
