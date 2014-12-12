@@ -48,6 +48,9 @@ def do_index(l):
                 if p_speech not in (u'предлог', u'союз', u'междометие', u'частицв'):
                     poem_index.setdefault(item[0], []).append((i, pos, p_speech))
             pos +=1
+    cur_index = json.dumps(poem_index)
+    with codecs.open('index.txt', 'w', encoding='utf-8') as f:
+        f.write(cur_index)
     return poem_index
 
 def clear(s):
