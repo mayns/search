@@ -8,7 +8,6 @@ import json
 
 
 def getwordfromindex(word):
-  print poems_index[word] 
   return poems_index[word]
 
 def check_phrase(phrase):
@@ -17,7 +16,7 @@ def check_phrase(phrase):
     try:
       res_tuples.extend(getwordfromindex(word))
     except Exception:
-      print 'PLOHOMNE'
+      print word +' PLOHO'
   res_dict = {}
   #iterate through all tuples from index and build a dict
   #dict = {id of word in index : list of all tuples from index info}
@@ -88,9 +87,8 @@ poems = index.do_list(u'poems.txt')
 with codecs.open('index.txt', 'r', encoding='utf-8') as f:
     r = f.read()
     poems_index = json.loads(r)
-
 while(True):
   print 'Hi there! I am ready to process your request...'
-  res = process_request(raw_input().decode(encoding="utf-8"))
+  res = process_request(raw_input().decode(encoding='utf-8'))
   print res
 #TODO we may OGREBSTY from the fact, that we may get several inclusions of a word inside one poem
