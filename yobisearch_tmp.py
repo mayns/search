@@ -5,7 +5,11 @@ import random
 import index.poems_index as index
 import codecs
 import json
+from synonims.amazing_variants import amazing_fun
 
+class NoResultException(Exception):
+  def __init__(self, msg):
+    super(NoResultException, self).__init__(msg)
 
 def getwordfromindex(word):
   return poems_index[word]
@@ -16,7 +20,8 @@ def check_phrase(phrase):
     try:
       res_tuples.extend(getwordfromindex(word))
     except Exception:
-      print word +' PLOHO'
+      pass
+	
   res_dict = {}
   #iterate through all tuples from index and build a dict
   #dict = {id of word in index : list of all tuples from index info}
@@ -29,9 +34,9 @@ def check_phrase(phrase):
       res_dict[elem[0]] = curr_val 
     else:
       res_dict.update({elem[0]:[elem]})
-  
-  if res_dict == {}:
-    raise Exception
+
+  if not res_dict:
+    return None
  
   #best result of inclusions 
   maxlen = max([len(res_dict[elem]) for elem in res_dict])
@@ -51,15 +56,18 @@ def check_phrase(phrase):
 
 def process_request(request):
   #TODO change for oks method
-  #search_phrases = oks.amazing_fun(request)
-  search_phrases = ['жопа']
+  search_phrases = amazing_fun(request)
 
+  #search_phrases = [request]  
+ 
   max_inclusion_len = 0
   pretendents = []
 
   #remove all phrases scoring lower than max_len
   for phrase in search_phrases:
-    res = check_phrase(phrase)
+    res = check_phrase(phrase.split())
+    if not res:
+      continue
     if max_inclusion_len == res[0]:
       pretendents.append(res[1])
     if max_inclusion_len < res[0]:
@@ -75,7 +83,10 @@ def process_request(request):
       middiff += elem[d]
     middiff /= len(elem.keys())
     len_scores.append(middiff)
-  
+
+  if not len_scores:
+    return None
+ 
   max_id = len_scores.index(max(len_scores))
   #TODO sort by pos score
   unsorted_res = list(pretendents[max_id])
@@ -89,6 +100,12 @@ with codecs.open('index.txt', 'r', encoding='utf-8') as f:
     poems_index = json.loads(r)
 while(True):
   print 'Hi there! I am ready to process your request...'
+  #print raw_input().decode(encoding='utf-8')
   res = process_request(raw_input().decode(encoding='utf-8'))
-  print res
+  if not res:
+    print 'no res for req'
+    continue
+  for elem in res:
+    print poems[elem] 
+ 
 #TODO we may OGREBSTY from the fact, that we may get several inclusions of a word inside one poem

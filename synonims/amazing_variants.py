@@ -28,8 +28,6 @@ def amazing_fun(boring_string, lang=u'ru-ru'):
 
     full_variants = product(*columns)
     amazing_variants = [' '.join(list(full_var)) for full_var in list(full_variants)]
-    for var in amazing_variants:
-        print var
     return amazing_variants
 
 if __name__ == u'__main__':
