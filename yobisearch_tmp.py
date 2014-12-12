@@ -6,7 +6,7 @@ import index.poems_index as index
 
 
 def getwordfromindex(word):
-  return [(random.randrange(100),random.randrange(100),'verb')]
+  return poems_index[word]
 
 def check_phrase(phrase):
   res_tuples = []
@@ -43,7 +43,7 @@ def check_phrase(phrase):
 
 def process_request(request):
   #TODO change for oks method
-  #search_phrases = oks.amazingfun(request)
+  #search_phrases = oks.amazing_fun(request)
   search_phrases = ['жопа']
 
   max_inclusion_len = 0

@@ -10,6 +10,7 @@ import json
 delete = re.compile(u'[^а-яА-Я\-]+?', re.UNICODE)
 clr = re.compile(r'\s+', re.UNICODE)
 
+
 def do_list(path):
     f = codecs.open(path, encoding=u'utf-8')
     poems = []
@@ -25,7 +26,6 @@ def do_list(path):
         if s:
             poems.append(s)
     return poems
-
 
 
 def do_index(l):
