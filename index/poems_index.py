@@ -28,7 +28,12 @@ def do_index(l):
         u'NUMR': u'числительное',
         u'ADVB': u'наречие',
         u'NPRO': u'местоимение',
-        u'PRED': u'наречие'
+        u'PRED': u'наречие',
+        u'PRCL': u'частица',
+        u'CONJ': u'союз',
+        u'PREP': u'предлог',
+        u'INTJ': u'междометие',
+
     }
     for i in xrange(len(l)):
         print 'creating index for poem ...', i
@@ -43,7 +48,7 @@ def do_index(l):
             for item in normal:
                 p_speech = item[1]
                 if p_speech not in (u'PREP', u'CONJ', u'PRCL', u'INTJ'):
-                    poem_index.setdefault(item[0],[]).append((i,pos,pos_match[p_speech]))
+                    poem_index.setdefault(item[0], []).append((i, pos, pos_match[p_speech]))
             pos +=1
     return poem_index
 

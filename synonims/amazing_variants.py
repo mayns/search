@@ -27,7 +27,10 @@ def amazing_fun(boring_string, lang=u'ru-ru'):
             columns[i].extend(variants[i])
 
     full_variants = product(*columns)
-    return [' '.join(list(full_var)) for full_var in list(full_variants)]
+    amazing_variants = [' '.join(list(full_var)) for full_var in list(full_variants)]
+    for var in amazing_variants:
+        print var
+    return amazing_variants
 
 if __name__ == u'__main__':
-    amazing_fun(u'город засыпает')
+    amazing_fun(u'выпить водочки да закусить огурчиком')

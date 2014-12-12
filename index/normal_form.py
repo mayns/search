@@ -18,7 +18,11 @@ pos_match = {
     u'NUMR': u'числительное',
     u'ADVB': u'наречие',
     u'NPRO': u'местоимение',
-    u'PRED': u'наречие'
+    u'PRED': u'наречие',
+    u'PRCL': u'частица',
+    u'CONJ': u'союз',
+    u'PREP': u'предлог',
+    u'INTJ': u'междометие',
 }
 
 def get_normal(word):
