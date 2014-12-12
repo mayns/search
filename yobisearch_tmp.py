@@ -13,7 +13,10 @@ def getwordfromindex(poems_index, word):
 def check_phrase(phrase):
   res_tuples = []
   for word in phrase:
-    res_tuples.extend(getwordfromindex(word))
+    try:
+      res_tuples.extend(getwordfromindex(word))
+    except Exception:
+      print 'PLOHOMNE'
   res_dict = {}
   #iterate through all tuples from index and build a dict
   #dict = {id of word in index : list of all tuples from index info}
@@ -76,7 +79,7 @@ def process_request(request):
   return sorted(unsorted_res,reverse=True)
 
 poems = index.do_list(u'poems.txt')
-# poems_index = index.do_index(poems)
+poems_index = index.do_index(poems)
 
 with codecs.open('index.txt', 'r', encoding='utf-8') as f:
     r = f.read()
