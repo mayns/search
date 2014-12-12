@@ -6,19 +6,36 @@ import json
 
 __author__ = 'mayns'
 
-string = raw_input()
-print string
+KEY = u'dict.1.1.20141207T200218Z.c01ef3f11cea86bf.3421773cbca3c8c8872988fc567a3815f27c0159'
+YA_REQUEST = \
+    lambda text, lang: u'https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key={key}&lang=' \
+                             u'{lang}&text={text}&ui=ru'.format(key=KEY, lang=lang, text=quote(text.encode('utf-8')))
 
-key = u'dict.1.1.20141207T200218Z.c01ef3f11cea86bf.3421773cbca3c8c8872988fc567a3815f27c0159'
 
-url = u'https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key={key}&' \
-      u'lang=ru-ru&text={text}&ui=ru'.format(key=key, text=quote(string))
-
-resp = urllib2.urlopen(url).read()
-
-syns = json.loads(resp).get(u'def')
-print resp
-# print syns
+def get_syns(words, lang=u'ru-ru'):
+    """
+    :type words: list
+    :param words: list of tuples from get_normal func
+    rtype: list
+    """
+    syns_variants = []
+    for word in words:
+        word_syns = set()
+        resp = urllib2.urlopen(YA_REQUEST(word[0], lang)).read()
+        syns = json.loads(resp).get(u'def')
+        if not syns:
+            return []
+        syns = syns[0].get(u'tr')
+        if not syns:
+            return []
+        for syn in syns:
+            if syn.get(u'pos') != word[1] or not syn.get(u'text'):
+                word_syns.add(None)
+            word_syns.add(syn.get(u'text'))
+            if syn.get(u'syn'):
+                map(lambda x: word_syns.add(x['text']), syn['syn'])
+        syns_variants.append(list(word_syns))
+    return syns_variants
 
 d = {
     "head": {},
