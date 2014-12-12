@@ -35,7 +35,8 @@ def get_normal(word):
         p = item.normal_form
         if p not in normal:
             normal.append(p)
-            p_speech.append(pos_match[item.tag.POS])
+            if item.tag.POS:
+                p_speech.append(pos_match[item.tag.POS])
     return zip(normal, p_speech)
 
 if __name__ == '__main__':
