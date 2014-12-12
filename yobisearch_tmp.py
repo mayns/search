@@ -39,7 +39,6 @@ def check_phrase(phrase):
       score_table.update({elem_id:diff})
   return(maxlen,score_table)
 
-#TODO CHCK ALL BELOW
 def process_request(request):
   #TODO change for oks method
   #search_phrases = oks.amazingfun(request)
@@ -48,6 +47,7 @@ def process_request(request):
   max_inclusion_len = 0
   pretendents = []
 
+  #remove all phrases scoring lower than max_len
   for phrase in search_phrases:
     res = check_phrase(phrase)
     if max_inclusion_len == res[0]:
@@ -56,29 +56,23 @@ def process_request(request):
       pretendents = []
       pretendents.append(res[1])
       max_inslusion_len = res[0]
-
   #check pos score and get the winner phrase
-  len_scores = {}
+  #TODO potential bug when we will sort the list
+  len_scores = []
   for elem in pretendents:
-    middiff = 0
+    middiff=0
     for d in elem:
       middiff += elem[d]
-    middiff /= len(elem[1])
-    len_scores.update({elem:middiff})
-    
-  #getmaxid
-  max_id = 0
-  max_val = 0
-  for i in range(len(pretendents)):
-    if max_val < len_scores[i]:
-      max_id = i
-      max_val = len_scores[i]
-
+    middiff /= len(elem.keys())
+    len_scores.append(middiff)
+  
+  max_id = len_scores.index(max(len_scores))
   #TODO sort by pos score
-  return pretendents[max_id][1].keys()
+  unsorted_res = list(pretendents[max_id])
+  return sorted(unsorted_res,reverse=True)
 
 while(True):
   print 'Hi there! I am ready to process your request...'
   res = process_request(raw_input())
-
+  print res
 #TODO we may OGREBSTY from the fact, that we may get several inclusions of a word inside one poem
