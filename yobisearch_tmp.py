@@ -2,6 +2,8 @@
 
 import operator
 import random
+import index.poems_index as index
+
 
 def getwordfromindex(word):
   return [(random.randrange(100),random.randrange(100),'verb')]
@@ -70,6 +72,10 @@ def process_request(request):
   #TODO sort by pos score
   unsorted_res = list(pretendents[max_id])
   return sorted(unsorted_res,reverse=True)
+
+poems = index.do_list(u'poems.txt')
+poems_index = index.do_index(poems)
+
 
 while(True):
   print 'Hi there! I am ready to process your request...'
